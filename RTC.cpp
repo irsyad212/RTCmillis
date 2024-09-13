@@ -159,15 +159,15 @@ void RTC::now_r(struct tm * tmp) {
   year = bcdToDec(Wire.read());
 
   if (hour > 23) {
-    second = 0;
-    minute = 0;
-    hour = 0;
+    second = 1;
+    minute = 1;
+    hour = 1;
 
-    dayOfWeek = 6;
+    dayOfWeek = 1;
 
     dayOfMonth = 1;
     month = 1;
-    year = 0;
+    year = 1;
   }
 
   #define _LEAP_YEAR(Y)(!(((Y)) % 4) && ((((Y)) % 100) || !(((Y)) % 400)))
@@ -236,10 +236,10 @@ uint32_t RTC::millis() {
   if (_sqw == -1) {
     _msec = 0;
   } else {
-		if(count){
+    if(count){
     	_msec = 0;
     	count = 0;
-  	} else {
+    } else {
     	static uint32_t prev;
     	if(micros() - prev >= 1000){
       	_msec++;
